@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 
 const useWeather = () => {
     const [weatherData,setWeatherData] = useState({
+        name: '',
         location: '',
         climate: '',
         temperature: '',
@@ -39,10 +40,11 @@ const useWeather = () => {
             }
 
             const data = await response.json();
+
             const updatedWeatherData = {
                 ...weatherData,
                 name: data?.name,
-                climate: '',
+                climate: data?.weather[0]?.description,
                 temperature: data?.main?.temp,
                 maxTemperature: data?.main?.temp_max,
                 minTemperature: data?.main?.temp_min,
